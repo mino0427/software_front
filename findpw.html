@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PW찾기</title>
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/style1.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .find_container {
+            width: 700px;
+            padding: 20px;
+            margin: 30px auto 0px auto;
+        }
+
+        .pw_container {
+            width: 550px;
+            padding: 10px;
+            margin: 30px auto auto auto;
+        }
+
+        .textcenter {
+            text-align: center;
+        }
+
+        .bottom {
+            margin-bottom: 15px;
+        }
+
+        .boxleft {
+            width: 30px;
+        }
+
+        body {
+            background-color: #1c2630;
+        }
+
+        .divcol {
+            color: blanchedalmond;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="find_container shadow rounded border border-primary divcol">
+        <div>
+            <h3 style="text-align: center; display: inline-block; margin-left: 200px;"><b>아이디/비밀번호 찾기</b></h3>
+            <a href="home10.html" class="btn btn-outline-secondary" style="margin: auto 5px 10px 10px;"><i
+                    class="fa-solid fa-house justify-content-end"></i></a>
+            <a href="loginproject.html" class="btn btn-outline-primary" style="margin: auto auto 10px auto;">
+                <i class="fa-solid fa-right-to-bracket"></i></a>
+        </div>
+        <hr />
+
+        <div class="bottom">
+            <h4 class="textcenter">비밀번호 찾기</h4>
+        </div>
+
+        <div>
+            <h6 class="textcenter">인증방법을 선택해주세요</h6>
+        </div>
+
+        <div class="pw_container shadow border border-primary bottom">
+            <div>
+                <h6 class="textcenter">등록된 이름</h6>
+                <h6 class="textcenter">아이디로 찾기</h6>
+
+                <hr />
+            </div>
+
+            <div>
+                <h6 class="textcenter bottom">회원정보에 등록한 값과 입력한 값이 일치해야 합니다.</h6>
+            </div>
+
+            <div class="bottom">
+                <label class="boxleft"></label>
+                <input type="text" placeholder="이름 입력" id="savename" class="rounded form-control"
+                    style="width: 200px; margin-right: 5px; display: inline-block;" />
+                <input style="width: 250px; display: inline-block;" type="text" placeholder="아이디 입력" id="saveid"
+                    class="rounded form-control" />
+            </div>
+
+            <div class="bottom">
+                <button class="rounded btn btn-outline-primary" style="width: 130px; margin: auto 0 auto 200px;"
+                    onclick="findPw()">비밀번호 찾기</button>
+            </div>
+
+            <div>
+                <label style="margin: auto auto auto 260px;">
+                    <b style="font-size: 15px; display: inline;">회원이 아니신가요?</b>
+                    <a href="join1.html" class="btn btn-outline-secondary" style="font-size: 15px; margin-left: 10px;">→
+                        회원가입</a>
+                </label>
+            </div>
+
+        </div>
+
+        <div>
+            <a href="findidpw.html" class="btn btn-outline-danger" style="width: 130px; margin: auto 0 auto 263px;">아이디
+                찾기</a>
+
+        </div>
+    </div>
+
+    <script>
+        function findPw() {
+            let sn = savename.value;
+            let si = saveid.value;
+
+            if (sn.length < 1) {
+                alert('이름을 입력하세요');
+                sn.focus();
+                return false;
+            }
+
+            if (si.length < 8) {
+                alert('아이디를 확인하세요');
+                si.focus();
+                return false;
+            }
+
+            else {
+                window.location.href = "#"
+                alert('미구현 기능입니다');
+            }
+        }
+    </script>
+</body>
+
+</html>

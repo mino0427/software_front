@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <link href="css/style1.css" rel="stylesheet" />
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .joinlabel {
+            width: 100px;
+        }
+
+        body {
+            background-color: #1c2630;
+        }
+
+        .divcol {
+            color: blanchedalmond;
+        }
+
+        h6 {
+            font-size: small;
+            color: blanchedalmond;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="boxcontainer border-primary rounded shadow divcol">
+        <div>
+            <h3 style="display: inline-block; margin-left: 250px;">회원가입</h3>
+            <a href="home10.html" class="btn btn-outline-secondary" style="display: inline-block; margin: auto 5px 10px 150px;"><i
+                    class="fa-solid fa-house justify-content-end"></i></a>
+            <a href="loginproject.html" class="btn btn-outline-primary" style="display: inline-block; margin: auto auto 10px auto;">
+                <i class="fa-solid fa-right-to-bracket"></i></a>
+            <hr />
+            <div class="container text-center">
+                <div class="row">
+                    <div class="col">
+                        <h6 style="text-align: start;">'*'는 필수입력 항목입니다.</h6>
+                    </div>
+                    <div class="col">
+                        <a href="join.html">
+                            <h6><b><u>➣ 간편 회원가입을 원하시면 여기를 클릭하세요</u></b></h6>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <hr />
+        </div>
+
+        <div class="margin">
+            <label class="labelstyle joinlabel">* 아이디</label>
+            <input type="text" placeholder="아이디 입력" id="id" class="rounded border border-secondary"
+                style="margin-right: 10px;" />
+            <label>7자 이상 입력하세요</label>
+            <!-- <button class="border rounded btn btn-primary">아이디 중복 확인</button> -->
+        </div>
+
+        <div class="margin">
+            <label class="labelstyle joinlabel">* 암호</label>
+            <input type="password" placeholder="암호" id="pw" class="rounded border border-secondary"
+                style="margin-right: 10px;" />
+            <label>8자 이상 입력하세요</label>
+        </div>
+
+        <div class="margin">
+            <label class="labelstyle joinlabel">* 암호 확인</label>
+            <input type="password" placeholder="암호 확인" id="pwck" class="rounded border border-secondary" />
+        </div>
+
+
+        <div class="margin">
+            <label class="labelstyle joinlabel">* 이름</label>
+            <input type="text" placeholder="이름" id="uname" class="rounded border border-secondary" />
+        </div>
+
+        <div class="margin">
+            <label class="labelstyle joinlabel">성별</label>
+            <input type="radio" name="gender" value="남" />남
+            <input type="radio" name="gender" value="여" />여
+        </div>
+
+        <div class="margin">
+            <label class="labelstyle" id="adress">주소</label>
+            <input type="text" id="sample4_postcode" placeholder="우편번호" class="rounded border border-secondary margin"
+                readonly>
+            <button onclick="sample4_execDaumPostcode()" class="btn btn-outline-secondary" style="font-size: small;">
+                우편번호 찾기
+            </button>
+            <input type="text" id="sample4_roadAddress" placeholder="도로명주소"
+                class="rounded border border-secondary labelstyle" style="width: 350px; margin: auto auto 10px 105px;"
+                readonly>
+            <input type="text" id="sample4_jibunAddress" placeholder="지번주소"
+                class="rounded border border-secondary labelstyle" style="width: 350px; margin: auto 5px 10px 105px;"
+                readonly>
+            <span id="guide" style="color:#999;display:none"></span>
+            <input type="text" id="sample4_detailAddress" placeholder="상세주소" class="rounded border border-secondary">
+            <input type="text" id="sample4_extraAddress" placeholder="참고항목" class="rounded border border-secondary"
+                style="margin: auto auto 10px 105px;">
+            <br />
+
+        </div>
+
+        <div class="margin">
+            <label class="labelstyle joinlabel">* 이메일</label>
+            <input type="email" placeholder="이메일 입력" id="uemail" class="rounded border border-secondary" />
+            <select id="emailselect" class="rounded border border-secondary">
+                <option>이메일 선택</option>
+                <option>@naver.com</option>
+                <option>@daum.net</option>
+                <option>@google.com</option>
+                <option>@hanmail.net</option>
+                <option>직접입력</option>
+            </select>
+        </div>
+
+        <div class="margin">
+            <label class="labelstyle joinlabel">관심분야</label>
+            <input type="radio" id="interest" /> HTML
+            <input type="radio" id="interest" /> CSS
+            <input type="radio" id="interest" /> JAVASCRIPT
+            <input type="radio" id="interest" /> JQUERY
+        </div>
+
+        <div>
+            <label class="labelstyle joinlabel"></label>
+            <textarea class="rounded border border-secondary mb" style="display: inline-block; margin-bottom: 10px;"
+                rows="6" ; placeholder="자기소개" id="introduce"></textarea>
+        </div>
+
+        <div class="margin">
+            <label class="labelstyle joinlabel">이미지</label>
+            <input type="file" />
+        </div>
+
+        <div class="margin">
+            <label class="labelstyle joinlabel">* 생년월일</label>
+            <input type="date" placeholder="생년월일" id="birthdate" class="rounded border border-secondary" />
+        </div>
+
+        <div class="margin">
+            <label class="labelstyle joinlabel">* 나이</label>
+            <input type="number" placeholder="(만) 나이" id="uage" class="rounded border border-secondary" />
+        </div>
+
+        <div class="margin">
+            <label style="display: block;">* 개인정보수집동의</label>
+            <img class='mb' src="imgfile/개인정보수집동의.PNG">
+            <input type="radio" name="options" id="agree" value="동의" checked />동의
+            <input type="radio" name="options" id="disagree" value="미동의" />미동의
+        </div>
+
+        <div class="bs">
+            <button type="submit" class="rounded border btn btn-outline-primary" onclick="joinAction()">가입완료</button>
+        </div>
+    </div>
+
+
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+
+        async function joinAction() {
+            if (id.value.length <= 6) {
+                Swal.fire({
+                    icon: "error",
+                    title: "아이디를 확인하세요",
+                    text: "아이디가 7자 이내입니다",
+                    didClose: () => {
+                        id.focus();
+                    }
+                });
+                return false;
+            }
+            else if (pw.value.length <= 7) {
+                Swal.fire({
+                    icon: "error",
+                    title: "비밀번호를 확인하세요",
+                    didClose: () => {
+                        pw.focus();
+                    }
+                });
+                return false;
+            }
+            else if (pwck.value !== pw.value) {
+                Swal.fire({
+                    icon: "error",
+                    title: "비밀번호가 일치하지 않습니다",
+                    didClose: () => {
+                        pwck.focus();
+                    }
+                });
+                return false;
+            }
+            else if (uname.value.length < 1) {
+                Swal.fire({
+                    icon: "error",
+                    title: "이름 확인하세요",
+                    didClose: () => {
+                        uname.focus();
+                    }
+                });
+                return false;
+            }
+
+            else if (uemail.value.length < 1) {
+                Swal.fire({
+                    icon: "error",
+                    title: "이메일을 확인하세요",
+                    didClose: () => {
+                        uemail.focus();
+                    }
+                });
+                return false;
+            }
+
+            else if (emailselect.value === "이메일 선택") {
+                Swal.fire({
+                    icon: "error",
+                    title: "이메일을 선택하세요",
+                    didClose: () => {
+                        emailselect.focus();
+                    }
+                });
+                return false;
+            }
+
+            else if (birthdate.value.length < 6) {
+                Swal.fire({
+                    icon: "error",
+                    title: "생년월일을 선택하세요",
+                    didClose: () => {
+                        birthdate.focus();
+                    }
+                });
+                return false;
+            }
+
+            else if (uage.value.length < 1 || uage.value.length > 100) {
+                Swal.fire({
+                    icon: "error",
+                    title: "나이를 확인하세요",
+                    didClose: () => {
+                        uage.focus();
+                    }
+                });
+                return false;
+            }
+
+            else {
+                // 서버 주소와 타입 설정(변경불가x)
+                const url = `http://ihongss.com:13000/api/member/join.json`;
+                const headers = { "Content-Type": "application/json" };
+
+                // 내가 보낼 데이터 정보 body 생성
+                const body = {
+                    _id: `${id.value}`,
+                    password: `${pw.value}`,
+                    email: `${uemail.value}` + `${emailselect.value}`,
+                    age: Number(`${uage.value}`),
+                    name: `${uname.value}`,
+                }
+
+
+                const { data } = await axios.post(url, body, { headers }); // 데이터를 보낼 때 post를 사용
+                console.log('result =>', data);
+
+                if (data.status === 200) {
+                    Swal.fire({
+                        title: "회원가입완료",
+                        text: "회원가입되었습니다.",
+                        didClose: () => { // 창이 닫힐때
+                            window.location.href = `home10.html`;
+                        }
+                    });
+                }
+                else {
+                    Swal.fire({
+                        title: "회원가입실패",
+                        text: "가입실패 했습니다.",
+                    });
+                }
+            }
+        }
+
+        function sample4_execDaumPostcode() {
+            new daum.Postcode({
+                oncomplete: function (data) {
+                    console.log(data);
+                    sample4_postcode.value = data.zonecode;
+                    sample4_roadAddress.value = data.roadAddress;
+                    sample4_jibunAddress.value = data.jibunAddress;
+
+                    var roadAddr = data.roadAddress; // 도로명 주소 변수
+                    var extraRoadAddr = ''; // 참고 항목 변수
+
+                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                    if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+                        extraRoadAddr += data.bname;
+                    }
+                    // 건물명이 있고, 공동주택일 경우 추가한다.
+                    if (data.buildingName !== '' && data.apartment === 'Y') {
+                        extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                    if (extraRoadAddr !== '') {
+                        extraRoadAddr = ' (' + extraRoadAddr + ')';
+                    }
+
+                    // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                    document.getElementById('sample4_postcode').value = data.zonecode;
+                    document.getElementById("sample4_roadAddress").value = roadAddr;
+                    document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
+
+                    // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
+                    if (roadAddr !== '') {
+                        document.getElementById("sample4_extraAddress").value = extraRoadAddr;
+                    } else {
+                        document.getElementById("sample4_extraAddress").value = '';
+                    }
+
+                    var guideTextBox = document.getElementById("guide");
+                    // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+                    if (data.autoRoadAddress) {
+                        var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+                        guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+                        guideTextBox.style.display = 'block';
+
+                    } else if (data.autoJibunAddress) {
+                        var expJibunAddr = data.autoJibunAddress;
+                        guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
+                        guideTextBox.style.display = 'block';
+                    } else {
+                        guideTextBox.innerHTML = '';
+                        guideTextBox.style.display = 'none';
+                    }
+
+                }
+            }).open();
+        }
+
+    </script>
+
+</body>
+
+</html>

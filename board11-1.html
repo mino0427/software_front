@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판10</title>
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <style>
+        .board_container {
+            width: 900px;
+            padding: 20px;
+            margin: 20px auto 0px auto;
+        }
+
+        .margin20 {
+            margin-bottom: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color :black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="board_container shadow">
+        <div class="margin20">
+            <h3>게시판10</h3>
+        </div>
+
+        <div class="row g-3 align-items-center justify-content-between margin20">
+            <div class="col-auto">
+                <div class="btn-group">
+                    <a href="home10.html" class="btn btn-outline-primary">홈으로</a>
+                    <a href="boardwrite11-1.html" class="btn btn-outline-primary">글쓰기</a>
+                </div>
+            </div>
+            
+            <div class="col-auto">
+                <form action="board11-1.html" method="get">
+                    <div class="row g-1">
+                        <div class="col-auto">
+                            <input type="hidden" name="page" value="1" />
+                            <input type="text" name="text" class="form-control" placeholder="검색어" />
+                        </div>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-outline-primary">검색</button>
+                        </div>
+                    </div>      
+                </form>  
+            </div>
+        </div>
+
+        <div class="margin20">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th style="width:100px">번호</th>
+                        <th>제목</th>
+                        <th style="width:100px">작성자</th>
+                        <th style="width:100px">조회수</th>
+                        <th style="width:260px">날짜</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row g-3 margin20 justify-content-center">
+            <div class="col-auto">
+                <ul class="pagination" id="pagination-demo"></ul>    
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js"></script>
+        <script>
+            // http://127.0.0.1:5500/board11-1.html
+            // http://127.0.0.1:5500/board11-1.html?page=1&text=
+            const urlPath = new URL(window.location.href);
+            const urlParams = urlPath.searchParams;
+            let page = urlParams.get("page"); // 1
+            let text = urlParams.get("text"); // ''
+            if(page === null) {
+                page = 1;
+            }
+            if(text === null) {
+                text = '';
+            }
+
+            // 서버에서 게시글 목록을 받아오는 함수
+            async function boardList() {
+                const url = `http://ihongss.com:13000/api/board/select.json?page=${page}&text=${text}&cnt=10`;
+                const headers = {"Content-Type":"application/json"};
+                const { data } = await axios.get(url, {headers});
+                console.log(data); //{status:200, rows:[], total:18}
+
+                let rows = data.rows; //[{},{},{},{}...{}]
+                for(let tmp of rows) {
+                    //tbody에 추가
+                    tbody.innerHTML += 
+                        `<tr style='cursor:pointer;' onclick='nextPage(${tmp._id})'>`+
+                            `<td>${tmp._id}</td>`+
+                            `<td>${tmp.title.substr(0, 30)}</td>`+
+                            `<td>${tmp.writer.substr(0, 4)}</td>`+
+                            `<td>${tmp.hit}</td>`+
+                            `<td>${tmp.regdate2}</td>`+
+                        `</tr>`;
+                }
+                
+                let pages = Math.floor(data.total / 10) + 1;
+                $('#pagination-demo').twbsPagination({
+                    totalPages: pages, // 전체 페이지 수
+                    visiblePages: 5,   // 가로로 보이는 페이지 개수
+                    first : '처음',  // 글자 바꾸기 4개
+                    prev  : '이전',
+                    last  : '끝',
+                    next  : '다음',
+                    startPage : Number(page), // 페이지 읽어서 색깔바꾸기
+                    initiateStartPageClick :false, // 페이지 로딩될때 자동 클릭 방지
+                    onPageClick: function (event, page) {
+                        // 페이지 네이션에서 사용자가 클릭시 반응하는 코드
+                        window.location.href = `board11-1.html?page=${page}&text=${text}`;
+                    }
+                });
+            }
+
+            // 수동으로 호출시켜 함수를 동작시킴
+            boardList();
+
+            function nextPage(no) {
+                console.log(no);
+                window.location.href = `boardcontent11.html?no=${no}`;
+            }
+        </script>
+    </div>
+</body>
+
+</html>

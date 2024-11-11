@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원목록2</title>
+</head>
+
+<body>
+    <div>
+        <div id="div1">
+            <label>로그인 전</label>
+            <a href="login3.html"><button>로그인</button></a>
+            <a href="join3.html"><button>회원가입3</button></a>
+        </div>
+
+        <div id="div2">
+            <label>로그인 후</label>
+            <a href="logout3.html"><button>로그아웃</button></a>
+            <a href="update3.html"><button>회원정보변경</button></a>
+            <a href="updatepw3.html"><button>비번변경</button></a>
+
+        </div>
+
+        <div>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>아이디</th>
+                        <th>이름</th>
+                        <th>나이</th>
+                        <th>이메일</th>
+                        <th>등록일</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        // 저장소에서 token을 읽어봄
+        // 이유는 로그인인지 로그아웃인지 확인하기 위해
+        let token = sessionStorage.getItem('token'); // set은 넣는거 get은 가져오는거
+        // console.log(token);
+        if (token === null) {
+            // 과거에 로그인 한 적이 없음 (로그인 안됏으면 div1을 보이게하기, div2는 안보이게함)
+            div1.style.display = "block";
+            div2.style.display = "none";
+        }
+        else {
+            // 과거에 로그인 한적이 있음
+            div1.style.display = "none";
+            div2.style.display = "block";
+        }
+
+        // console.log(window);
+        async function memberList() {
+            const url = 'http://ihongss.com:13000/api/member/select.json?page=1&text=&cnt=20';
+            const headers = { "Content-Type": "application/json" };
+            //데이터를 받아옴
+            const { data } = await axios.get(url, { headers });
+            console.log('memberList', data);
+
+            if (data.status === 200) { // 받은 데이터가 200(정상) 이면
+                let arr = data.rows;
+                console.log(arr); // [{}, {}, {} ...]
+
+                for (let tmp of arr) {
+                    tbody.innerHTML +=
+                        `<tr>` +
+                        `<td>${tmp._id}</td>` +
+                        `<td>${tmp.name}</td>` +
+                        `<td>${tmp.age}</td>` +
+                        `<td>${tmp.email}</td>` +
+                        `<td>${tmp.regdate2}</td>` +
+                        `</tr>`;
+                }
+            }
+        }
+        memberList();
+    </script>
+    <!-- <script>
+
+        // 1. api 서버에서 정보/ 회원 정보 받음
+        const memberlist = [
+            { age: 13, name: '홍길동1', phone: '010-0000-0001' },
+            { age: 23, name: '홍길동2', phone: '010-0000-0002' },
+            { age: 33, name: '홍길동3', phone: '010-0000-0003' },
+            { age: 43, name: '홍길동4', phone: '010-0000-0004' },
+            { age: 53, name: '홍길동5', phone: '010-0000-0005' }
+        ]
+
+        // 2. t.body에 tr태그로 n개 추가
+        for (let tmp of memberlist) {
+            console.log(tmp);
+
+            tbody.innerHTML +=
+                `<tr>
+                    <td>${tmp.age}</td>
+                    <td>${tmp.name}</td>
+                    <td>${tmp.phone}</td>
+                </tr>`
+
+
+        }
+
+    </script> -->
+
+</body>
+
+</html>

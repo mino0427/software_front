@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <style>
+        .boardc_container {
+            width: 760px;
+            margin: 30px auto 0px auto;
+            padding: 20px;
+        }
+
+        .margin20 {
+            margin-bottom: 20px;
+        }
+
+        .margin10 {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="shadow boardc_container">
+        <div>
+            <h3>글내용</h3>
+        </div>
+
+        <div class="row g-3 align-items-center margin10">
+            <div class="col-auto">
+                <label style="width:80px;">글번호</label>
+            </div>
+            <div class="col-auto">
+                <label id="_id"></label>
+            </div>
+        </div>
+
+        <div class="row g-3 align-items-center margin10">
+            <div class="col-auto">
+                <label style="width:80px;">제목</label>
+            </div>
+            <div class="col-auto">
+                <label id="title"></label>
+            </div>
+        </div>
+
+        <div class="row g-3 align-items-start margin10">
+            <div class="col-auto">
+                <label style="width:80px;">내용</label>
+            </div>
+            <div class="col-auto">
+                <div style="width:500px; word-break: break-all;" id="content">
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-3 align-items-center margin10">
+            <div class="col-auto">
+                <label style="width:80px;">작성자</label>
+            </div>
+            <div class="col-auto">
+                <label id="writer"></label>
+            </div>
+        </div>
+
+        <div class="row g-3 align-items-center margin10">
+            <div class="col-auto">
+                <label style="width:80px;">조회수</label>
+            </div>
+            <div class="col-auto">
+                <label id="hit"></label>
+            </div>
+        </div>
+
+        <div class="row g-3 align-items-center margin10">
+            <div class="col-auto">
+                <label style="width:80px;">날짜</label>
+            </div>
+            <div class="col-auto">
+                <label id="regdate"></label>
+            </div>
+        </div>
+
+        <div class="row g-3 align-items-center justify-content-center margin20">
+            <div class="col-auto">
+                <a href="board11-1.html" class="btn btn-secondary">목록으로</a>
+                <button type="button" class="btn btn-primary" onclick="updatePage()">글변경</button>
+                <button type="button" class="btn btn-primary" onclick="deletePage()">글삭제</button>
+                <button type="button" class="btn btn-primary" onclick="prevPage()">이전글</button>
+                <button type="button" class="btn btn-primary" onclick="nextPage()">다음글</button>
+            </div>
+        </div>
+
+        <div class="row g-3 align-items-center justify-content-center margin20">
+            <div class="col-auto">
+                <textarea id="rcontent" placeholder="답변내용" rows="3" cols="90"></textarea>
+                <input type="text" id="rwriter" placeholder="답변자" />
+                <button onclick="insertBoardReply()" class="rounded btn btn-outline-primary">답변등록</button>
+            </div>
+        </div>
+
+        <div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>게시글번호</th>
+                        <th>답글번호</th>
+                        <th>답글내용</th>
+                        <th>답글작성자</th>
+                        <th style="text-align: center;">답글등록일</th>
+                        <th>버튼</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tbody">
+
+                </tbody>
+            </table>
+        </div>
+
+        <div id="disqus_thread"></div>
+
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+
+        /**
+        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+        /*
+        var disqus_config = function () {
+        this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+        */
+        (function () { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://web0-5.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+            Disqus.</a></noscript>
+    <script>
+
+
+        //1. 주소창에 ?no=번호 => 번호를 알아야 됨
+        const urlPath = new URL(window.location.href);
+        const urlParams = urlPath.searchParams;
+        const no = urlParams.get('no');
+        console.log(no);
+
+        // 100. 함수와 관련없이 공통으로 사용하는 영역
+        let prev = 0;
+        let next = 0;
+
+
+
+
+        //2. 번호를 전달하면 해당하는 내용을 서버에 받음
+        async function selectBoardOne() {
+            const url = `http://ihongss.com:13000/api/board/selectone.json?no=${no}`;
+            const headers = { "Content-Type": "application/json" };
+            const { data } = await axios.get(url, { headers });
+            console.log(data);
+
+            // 200. 다른 함수에서 사용하기 위해서 공통변수 값을 보관해 둠.
+            prev = data.prevNo;
+            next = data.nextNo;
+
+            _id.innerHTML = data.result._id;
+            title.innerHTML = data.result.title;
+            content.innerHTML = data.result.content;
+            writer.innerHTML = data.result.writer;
+            hit.innerHTML = data.result.hit;
+            regdate.innerHTML = data.result.regdate2;
+        }
+        selectBoardOne(); // 강제로 함수를 호출
+
+        async function readTimes() {
+            const url = `http://ihongss.com:13000/api/board/updatehit.json?no=${no}`;
+            const headers = { "Content-Type": "application/json" };
+            const body = {};
+            const { data } = await axios.put(url, body, { headers });
+        }
+        readTimes();
+
+        // 조회수
+
+
+
+        function prevPage() {
+            if (prev === 0) {
+                alert('이전글이 없습니다.');
+            }
+            else {
+                window.location.href = `boardcontent11.html?no=${prev}`;
+            }
+        }
+
+        function nextPage() {
+            if (next === 0) {
+                alert('다음글이 없습니다.');
+            }
+            else {
+                window.location.href = `boardcontent11.html?no=${next}`;
+            }
+        }
+
+        async function deletePage() {
+            if (confirm('삭제할까요?')) {
+                const url = `http://ihongss.com:13000/api/board/delete.json`;
+                const headers = { "Content-Type": "application/json" };
+                const { data } = await axios.delete(url, { headers: headers, data: { no: no } });
+                console.log(data);
+                if (data.status === 200) {
+                    alert('삭제되었습니다.');
+                    window.location.href = `board11-1.html`;
+                }
+            }
+        }
+
+        function updatePage() {
+            window.location.href = `boardupdate10.html?no=${no}`;
+        }
+
+        async function selectBoardReply() {
+            const url = `http://ihongss.com:13000/api/boardreply/select.json?brd=${no}`;
+            const headers = { "Content-Type": "application/json" };
+            const { data } = await axios.get(url, { headers });
+            console.log(data);
+
+            for (let tmp of data.rows) { //[{},{}]
+                tbody.innerHTML +=
+                    `<tr>` +
+                    `<td>${tmp.boardno}</td>` +
+                    `<td>${tmp._id}</td>` +
+                    `<td>${tmp.content}</td>` +
+                    `<td>${tmp.writer}</td>` +
+                    `<td>${tmp.regdate2}</td>` +
+                    `<td><button onclick="deleteBoardReply(${tmp._id})">삭제</button></td>` +
+                    `</tr>`
+            }
+        }
+        selectBoardReply(); //강제로 답글목록 읽음
+
+        async function deleteBoardReply(rno) {
+            if (confirm('댓글을 삭제할까요??')) {
+                const url = `http://ihongss.com:13000/api/boardreply/delete.json`;
+                const headers = { "Content-Type": "application/json" };
+                const { data } = await axios.delete(url, { headers: headers, data: { no: rno } });
+                console.log(data);
+                if (data.status === 200) {
+                    window.location.reload();
+                }
+            }
+        }
+
+        async function insertBoardReply() {
+            // 답글내용, 답글작성자 유효성 검사
+            const url = `http://ihongss.com:13000/api/boardreply/insert.json`;
+            const headers = { "Content-Type": "application/json" }
+            const body = {
+                brd: no,
+                content: rcontent.value,
+                writer: rwriter.value
+            }
+            const { data } = await axios.post(url, body, { headers });
+            console.log(data);
+            if (data.status === 200) {
+                window.location.reload();
+            }
+        }
+
+    </script>
+</body>
+
+</html>
+
+<!-- -- 답글 생성
+const url = `http://ihongss.com:13000/api/boardreply/insert.json`;
+const headers = {"Content-Type" : "application/json"}
+const body = { 
+    brd  : 게시글번호(답글번호아님),
+    content : 답글내용,
+    writer : 답글작성자
+}
+const { data } = await axios.post(url, body, {headers});
+console.log(data);
+
+-- 답글 조회(최신순부터)
+const url = `http://ihongss.com:13000/api/boardreply/select.json?brd=게시글번호`;
+const headers = {"Content-Type":"application/json"};
+const { data } = await axios.get(url, {headers});
+console.log(data);
+
+
+-- 답글 조회(이전글부터)
+const url = `http://ihongss.com:13000/api/boardreply/select1.json?brd=게시글번호`;
+const headers = {"Content-Type":"application/json"};
+const { data } = await axios.get(url, {headers});
+console.log(data);
+
+
+-- 답글 개수 조회
+const url = `http://ihongss.com:13000/api/boardreply/count.json?brd=게시글번호`;
+const headers = {"Content-Type":"application/json"};
+const { data } = await axios.get(url, {headers});
+console.log(data);
+
+
+-- 답글 삭제
+const url = `http://ihongss.com:13000/api/boardreply/delete.json`;
+const headers = {"Content-Type":"application/json"};
+const {data} = await axios.delete(url, {headers:headers, data:{no : no }});
+console.log(data); -->

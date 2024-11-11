@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="css/bootstrap.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div>
+        <h3>물품관리</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>물품번호</th>
+                    <th>이미지</th>
+                    <th>물품명</th>
+                    <th>물품내용</th>
+                    <th>물품가격</th>
+                    <th>물품수량</th>
+                    <th>등록일</th>
+                </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+        </table>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        let page = 1; //페이지번호
+        let text = ''; //검색어
+        let cnt  = 20; //한페이지당 개수
+
+        (async function selectItemList() {
+            const url = `http://ihongss.com:13000/api/item/selectlist.json?page=${page}&text=${text}&cnt=${cnt}`;
+            const headers = {"Content-Type":"application/json"};
+            const { data } = await axios.get(url, {headers});
+            console.log(data);    
+
+            for(let tmp of data.result) {
+                tbody.innerHTML +=
+                `<tr>` +
+                    `<td>${tmp._id}</td>`+
+                    `<td><img src="http://ihongss.com:13000${tmp.img}" style="width:50px;" /></td>`+
+                    `<td>${tmp.name}</td>`+
+                    `<td>${tmp.content}</td>`+
+                    `<td>${tmp.price}</td>`+
+                    `<td>${tmp.quantity}</td>`+
+                    `<td>${tmp.regdate1}</td>`+
+                `</tr>`
+            }
+        }());
+        
+
+    </script>
+</body>
+</html>

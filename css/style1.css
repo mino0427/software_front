@@ -1,0 +1,26 @@
+.boxcontainer {
+    display: block; /* 가로 높이 설정되고 한줄 내림 (기본설정) */
+    width: 700px; /* 가로크기 설정 */
+    border: 2px solid #090909; /* 테두리설정 */
+    padding: 20px; /* 안쪽 여백 */
+    margin: 10px auto 0px auto; /* 바깥 여백을 이용한 중앙정렬 */
+}
+
+.labelstyle{
+    width: 100px;
+    display: inline-block; /* 가로 높이 설정되고 가로로 배치 */
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.margin{
+    margin-bottom: 10px;
+}
+
+.mb{
+    display: block;
+}
+
+.bs{
+    margin: 10px auto 25px 250px;
+}

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ID/PW찾기</title>
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="css/style1.css" rel="stylesheet" />
+    <link href="css/styleipf.css" rel="stylesheet" type="text/css" />
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div class="find_container shadow rounded border border-primary box divcol">
+        <div>
+            <h3 class="textcenter" style="display: inline-block; margin-left: 200px; margin-right: 20px;"><b>아이디/비밀번호 찾기</b></h3>
+            <a href="home10.html" class="btn btn-outline-secondary" style="display: inline-block; margin-right: 5px; margin-bottom: 10px;"><i
+                class="fa-solid fa-house justify-content-end"></i></a>
+        <a href="loginproject.html" class="btn btn-outline-primary" style="display: inline-block; margin-bottom: 10px;">
+            <i class="fa-solid fa-right-to-bracket"></i></a>
+            <hr />
+        </div>
+
+        <div class="bottom">
+            <h4 class="textcenter">아이디 찾기</h4>
+        </div>
+
+        <div>
+            <h6 class="textcenter">인증방법을 선택해주세요</h6>
+        </div>
+
+        <div>
+            <div class="btn border border-secondary backgroundCol" onclick="emailfind()"
+                style="display: inline-block; margin-bottom: 10px; margin-left: 100px;">
+                <img src="imgfile/emailimg.png" style="width: 100px;" />
+                <div>
+                    <label>이메일로 찾기</label>
+                </div>
+            </div>
+
+            <div class="btn border border-secondary backgroundCol" onclick="numfind()"
+                style="display: inline-block; margin-bottom: 10px; margin-left: 20px;">
+                <img src="imgfile/phonenum.png" style="width: 100px;" />
+                <div>
+                    <label>전화번호로 찾기</label>
+                </div>
+            </div>
+
+            <div class="btn border border-secondary backgroundCol" onclick="certfind()"
+                style="display: inline-block; margin-bottom: 10px; margin-left: 20px;">
+                <img src="imgfile/phonenum.png" style="width: 100px;" />
+                <div>
+                    <label>본인명의로 인증</label>
+                </div>
+            </div>
+
+            <div class="id_container shadow border border-primary bottom">
+                <div>
+                    <h6 class="textcenter">등록된 이름</h6>
+                    <h6 class="textcenter">생년월일로 찾기</h6>
+                    <hr />
+                </div>
+
+                <div>
+                    <h6 class="textcenter">회원정보에 등록한 값과 입력한 값이 일치해야 합니다.</h6>
+                </div>
+
+                <div class="bottom row g-2">
+                    <label class="boxleft"></label>
+                    <input type="text" placeholder="이름 입력" id="savename" class="rounded form-control" style="width: 200px; margin-right: 15px;"/>
+                    <input style="width: 250px;" type="text" placeholder="생년월일 입력 예)19990101" id="savebirth" class="rounded form-control" />
+                </div>
+
+                <div class="bottom">
+                    <button class="rounded btn btn-outline-primary" style="width: 120px; margin: auto 0 auto 200px;"
+                        onclick="findId()">아이디 찾기</button>
+                </div>
+
+                <div>
+                    <label style="margin: auto auto auto 260px;">
+                        <b style="font-size: 15px; display: inline;">회원이 아니신가요?</b>
+                        <a href="join1.html" class="btn btn-outline-secondary" style="font-size: 15px; margin-left: 10px;">→
+                            회원가입</a>
+                    </label>
+                </div>
+
+            </div>
+
+            <div>
+                <a href="findpw.html" class="btn btn-outline-danger" style="width: 130px; margin: auto 0 auto 263px;">비밀번호
+                    찾기</a>
+            </div>
+        </div>
+
+        <script>
+
+            function findId() {
+                let sn = savename.value;
+                let sb = savebirth.value;
+
+                if (sn.length < 1) {
+                    alert('이름을 입력하세요')
+                    sn.focus();
+                    return false;
+                }
+
+                if (sb.length < 8 || sb.length > 8) {
+                    alert('생년월일을 확인하세요')
+                    sb.focus();
+                    return false;
+                }
+
+                else {
+                    window.location.href = "#"
+                    alert('미구현 기능입니다');
+                }
+            }
+
+            function emailfind() {
+                window.location.href = "#"
+                alert('미구현 기능입니다');
+            }
+
+            function numfind() {
+                window.location.href = "#"
+                alert('미구현 기능입니다');
+            }
+
+            function certfind() {
+                window.location.href = "#"
+                alert('미구현 기능입니다');
+            }
+        </script>
+
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+.id_container {
+    width: 550px;
+    padding: 10px;
+    margin: 30px auto auto auto;
+}
+
+.textcenter {
+    text-align: center;
+}
+
+.bottom {
+    margin-bottom: 15px;
+}
+
+.boxleft {
+    width: 30px;
+}
+
+.find_container {
+    width: 700px;
+    padding: 20px;
+    margin: 30px auto 0px auto;
+}
+
+body {
+    background-color: #1c2630;
+}
+
+.divcol {
+    color: blanchedalmond;
+}
+
+.backgroundCol {
+    color: #fff;
+}

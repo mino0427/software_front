@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>홈화면</title>
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <!-- 부트스트랩을 다운받아서 제공해주는 css를 사용하고 부트스트랩 홈페이지에서 어떻게 활용하는지 참고하여 쓰기 -->
+    <style>
+        .home_container {
+            width: 800px;
+            padding: 20px;
+            margin: 30px auto 0px auto;
+        }
+
+        .buttonmargin {
+            display: inline-block;
+            margin: 0 10px 10px auto;
+        }
+
+        body {
+            background: #232323;
+        }
+
+        .divcol {
+            color: antiquewhite;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="home_container shadow rounded border border-primary divcol">
+        <div id="div1">
+            <h3 style="text-align: center;">홈화면</h3>
+            <hr />
+            <a href="loginproject.html" class="btn btn-primary buttonmargin">로그인</a>
+            <a href="join.html" class="btn btn-primary buttonmargin">회원가입</a>
+            <hr />
+        </div>
+
+        <div id="div2">
+            <h3 style="text-align: center;">홈화면</h3>
+            <hr />
+            <a class="btn btn-primary buttonmargin" onclick="deleteToken()">로그아웃</a>
+            <a href="#" class="btn btn-primary buttonmargin">회원정보 변경</a>
+            <hr />
+        </div>
+
+        <div>
+            <a href="board11-1.html" class="btn btn-primary buttonmargin">게시판</a>
+            <a href="memberlist2.html" class="btn btn-primary buttonmargin">멤버리스트</a>
+            <hr />
+        </div>
+
+        <div>
+            <a href="iteminsert10.html" class="btn btn-primary buttonmargin">물품등록</a>
+            <a href="item10.html" class="btn btn-primary buttonmargin">물품관리</a>
+        </div>
+    </div>
+
+
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+        (function () {
+            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/5e40f671a89cda5a18850ba5/default';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        // 저장소에서 token을 읽어봄
+        // 이유는 로그인인지 로그아웃인지 확인하기 위해
+        let token = sessionStorage.getItem('token'); // set은 넣는거 get은 가져오는거
+        // console.log(token);
+        if (token === null) {
+            // 과거에 로그인 한 적이 없음 (로그인 안됏으면 div1을 보이게하기, div2는 안보이게함)
+            div1.style.display = "block";
+            div2.style.display = "none";
+        }
+        else {
+            // 과거에 로그인 한적이 있음
+            div1.style.display = "none";
+            div2.style.display = "block";
+        }
+
+        function deleteToken() {
+            if (confirm('로그아웃 할까요?')) { // confirm은 alert처럼 위에 물어보는 창이 뜨는 거
+                sessionStorage.removeItem('token'); // 로그인하면 token이 세션스토리지에 저장되어있는데 그 토큰을 지운다는 거임
+                window.location.href = "home10.html";
+            }
+            else {
+                window.location.href = "home10.html";
+            }
+        }
+
+    </script>
+</body>
+
+</html>

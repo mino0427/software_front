@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>홈</title>
+    <link href="css/homestyle.css" rel="stylesheet" />
+    <style>
+      h2 {
+        color: #fff;
+        justify-content: center;
+      }
+
+      /* 768px 이하의 화면에서 */
+      @media (max-width: 768px) {
+        header.front {
+          flex-direction: column;
+          text-align: center;
+          padding: 15px;
+        }
+
+        nav ul {
+          justify-content: center; /* 항목을 중앙 정렬 */
+          flex-wrap: wrap; /* 화면 크기에 따라 항목이 줄바꿈되도록 */
+          flex-direction: column;
+          gap: 10px;
+          width: 100%;
+        }
+
+        nav ul li a {
+          font-size: 14px;
+          padding: 8px 12px;
+        }
+
+        h5 {
+          font-size: 20px; /* 태블릿 크기에서는 약간 작은 글씨 */
+        }
+      }
+
+      /* 480px 이하의 화면에서 */
+      @media (max-width: 480px) {
+        h2 {
+          font-size: 24px;
+        }
+
+        h5 {
+          font-size: 30px; /* 모바일 크기에서는 더 작은 글씨 */
+        }
+
+        nav ul {
+          justify-content: center; /* 항목을 중앙 정렬 */
+          flex-wrap: wrap;
+          flex-direction: column;
+          gap: 10px;
+          width: 100%;
+        }
+
+        nav ul li a {
+          font-size: 12px;
+          padding: 8px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div>
+      <header
+        class="front"
+        style="
+          position: relative;
+          display: inline-block;
+          text-align: center justify-content-center;
+        "
+      >
+        <div id="map" style="width: 500px; height: 400px"></div>
+        <div class="menuToggle"></div>
+        <nav style="display: inline-block; margin-left: 200px">
+          <ul>
+            <div style="display: inline-block; margin-left: 200px">
+              <div id="div1" class="col">
+                <li>
+                  <a href="loginproject.html"><b>로그인</b></a>
+                </li>
+                <li>
+                  <a href="join.html"><b>회원가입</b></a>
+                </li>
+                <li>
+                  <a href="boardcontent11.html"><b>게시판</b></a>
+                </li>
+              </div>
+
+              <div id="div2" style="display: inline-block">
+                <li>
+                  <a onclick="deleteToken()"><b>로그아웃</b></a>
+                </li>
+                <li>
+                  <a href="#"><b>회원정보 수정</b></a>
+                </li>
+                <li>
+                  <a href="boardcontent11.html"><b>게시판</b></a>
+                </li>
+                <li>
+                  <a href="board11-1.html"><b>게시판목록</b></a>
+                </li>
+                <li>
+                  <a href="boardwrite11-1.html"><b>게시판 글쓰기</b></a>
+                </li>
+                <li>
+                  <a href="shop10.html"><b>물품</b></a>
+                </li>
+                <li>
+                  <a href="item10.html"><b>물품리스트</b></a>
+                </li>
+                <li>
+                  <a href="iteminsert10.html"><b>물품 등록</b></a>
+                </li>
+              </div>
+            </div>
+          </ul>
+        </nav>
+      </header>
+
+      <div>
+        <section>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </section>
+
+        <div>
+          <h2>Lib GO</h2>
+        </div>
+      </div>
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script>
+      type = "text/javascript";
+      src =
+        "//dapi.kakao.com/v2/maps/sdk.js?appkey=06806d5834f226c62e893175cdb0f2d4";
+    </script>
+    <script>
+      var container = document.getElementById("map");
+      var options = {
+        center: new kakao.maps.LatLng(33.450701, 126.570667),
+        level: 3,
+      };
+
+      var map = new kakao.maps.Map(container, options);
+    </script>
+    <script type="text/javascript">
+      var Tawk_API = Tawk_API || {},
+        Tawk_LoadStart = new Date();
+      (function () {
+        var s1 = document.createElement("script"),
+          s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = "https://embed.tawk.to/5e40f671a89cda5a18850ba5/default";
+        s1.charset = "UTF-8";
+        s1.setAttribute("crossorigin", "*");
+        s0.parentNode.insertBefore(s1, s0);
+      })();
+    </script>
+    <!--End of Tawk.to Script-->
+
+    <script>
+      // 저장소에서 token을 읽어봄
+      // 이유는 로그인인지 로그아웃인지 확인하기 위해
+      let token = sessionStorage.getItem("token"); // set은 넣는거 get은 가져오는거
+      // console.log(token);
+      if (token === null) {
+        // 과거에 로그인 한 적이 없음 (로그인 안됏으면 div1을 보이게하기, div2는 안보이게함)
+        div1.style.display = "block";
+        div2.style.display = "none";
+      } else {
+        // 과거에 로그인 한적이 있음
+        div1.style.display = "none";
+        div2.style.display = "block";
+      }
+
+      function deleteToken() {
+        if (confirm("로그아웃 할까요?")) {
+          // confirm은 alert처럼 위에 물어보는 창이 뜨는 거
+          sessionStorage.removeItem("token"); // 로그인하면 token이 세션스토리지에 저장되어있는데 그 토큰을 지운다는 거임
+          window.location.href = "home.html";
+        } else {
+          window.location.href = "home.html";
+        }
+      }
+    </script>
+  </body>
+</html>
