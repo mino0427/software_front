@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>홈</title>
+    <title>LIB GO</title>
     <link href="css/homestyle.css" rel="stylesheet" />
     <link href="css/background.css" rel="stylesheet" />
   </head>
@@ -50,15 +50,6 @@
                 <li>
                   <a href="boardwrite11-1.html"><b>게시판 글쓰기</b></a>
                 </li>
-                <li>
-                  <a href="shop10.html"><b>물품</b></a>
-                </li>
-                <li>
-                  <a href="item10.html"><b>물품리스트</b></a>
-                </li>
-                <li>
-                  <a href="iteminsert10.html"><b>물품 등록</b></a>
-                </li>
               </div>
             </div>
           </ul>
@@ -69,11 +60,29 @@
         <div>
           <h3>Lib GO</h3>
         </div>
-        <div style="justify-content: center">
-          <div id="map" style="width: 500px; height: 400px"></div>
+        <div>
+          <div
+            id="map"
+            style="width: 500px; height: 400px; align-items: center"
+          ></div>
         </div>
       </div>
     </div>
+
+    <script src="script/homescript.js"></script>
+    <!-- 카카오 맵 API 불러오기 -->
+    <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=06806d5834f226c62e893175cdb0f2d4&libraries=services"></script>
+    <script>
+      // 카카오 맵 초기화
+      window.onload = function () {
+        var container = document.getElementById("map");
+        var options = {
+          center: new kakao.maps.LatLng(33.450701, 126.570667),
+          level: 3,
+        };
+        var map = new kakao.maps.Map(container, options);
+      };
+    </script>
 
     <!--Start of Tawk.to Script-->
     <script type="text/javascript">
@@ -91,44 +100,6 @@
     </script>
     <!--End of Tawk.to Script-->
 
-    <script>
-      type = "text/javascript";
-      src =
-        "//dapi.kakao.com/v2/maps/sdk.js?appkey=06806d5834f226c62e893175cdb0f2d4";
-    </script>
-    <script>
-      var container = document.getElementById("map");
-      var options = {
-        center: new kakao.maps.LatLng(33.450701, 126.570667),
-        level: 3,
-      };
-
-      var map = new kakao.maps.Map(container, options);
-    </script>
-    <script>
-      // 저장소에서 token을 읽어봄
-      // 이유는 로그인인지 로그아웃인지 확인하기 위해
-      let token = sessionStorage.getItem("token"); // set은 넣는거 get은 가져오는거
-      // console.log(token);
-      if (token === null) {
-        // 과거에 로그인 한 적이 없음 (로그인 안됏으면 div1을 보이게하기, div2는 안보이게함)
-        div1.style.display = "block";
-        div2.style.display = "none";
-      } else {
-        // 과거에 로그인 한적이 있음
-        div1.style.display = "none";
-        div2.style.display = "block";
-      }
-
-      function deleteToken() {
-        if (confirm("로그아웃 할까요?")) {
-          // confirm은 alert처럼 위에 물어보는 창이 뜨는 거
-          sessionStorage.removeItem("token"); // 로그인하면 token이 세션스토리지에 저장되어있는데 그 토큰을 지운다는 거임
-          window.location.href = "home.html";
-        } else {
-          window.location.href = "home.html";
-        }
-      }
     </script>
   </body>
 </html>

@@ -8,8 +8,7 @@
 }
 
 body {
-  overflow: hidden;
-  z-index: 1;
+  /* overflow: hidden; */
   min-height: 100vh;
 }
 
@@ -60,10 +59,27 @@ h6 {
 
 .front {
   position: relative;
-  z-index: 2;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+}
+
+.map {
+  width: 500px;
+  height: 400px;
+  align-items: center;
+  transform: translate(10%, 50%);
+}
+
+.test {
+  z-index: 5;
+  width: 100px;
+  margin-right: 1000px;
+}
+
+.imgtest {
+  z-index: 3;
+  bottom: 100vh;
 }
 
 header ul {
