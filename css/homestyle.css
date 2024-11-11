@@ -16,7 +16,6 @@ nav {
   position: fixed;
   display: flex;
   justify-content: center;
-  position: fixed;
   bottom: 0;
   width: 100%;
 }
@@ -33,53 +32,22 @@ h3 {
   text-transform: uppercase;
 }
 
-h5 {
-  position: absolute;
-  bottom: 55vh;
-  transform: translateY(50%);
-  width: 100%;
-  text-align: center;
-  color: #fff;
-  font-size: 5em;
-  font-weight: 800;
-  text-transform: uppercase;
-}
-
-h6 {
-  position: absolute;
-  bottom: 25vh;
-  transform: translateY(50%);
-  width: 50%;
-  text-align: center;
-  color: #fff;
-  font-size: 1.5em;
-  font-weight: 800;
-  text-transform: uppercase;
-}
-
-.front {
+/* .front {
+  display: flex;
   position: relative;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-}
+} */
 
-.map {
+#map {
+  position: relative;
+  left: 35%;
+  top: 150%;
   width: 500px;
-  height: 400px;
-  align-items: center;
-  transform: translate(10%, 50%);
-}
-
-.test {
-  z-index: 5;
-  width: 100px;
-  margin-right: 1000px;
-}
-
-.imgtest {
-  z-index: 3;
-  bottom: 100vh;
+  height: 500px;
+  margin-top: 20vh;
 }
 
 header ul {
@@ -108,55 +76,4 @@ header ul li a {
 
 header ul li a:hover {
   background: #2e798c;
-}
-
-/* 768px 이하의 화면에서 */
-@media (max-width: 768px) {
-  header.front {
-    flex-direction: column;
-    text-align: center;
-    padding: 15px;
-    transform: translateX(-10%);
-  }
-
-  nav ul {
-    justify-content: center; /* 항목을 중앙 정렬 */
-    flex-wrap: wrap; /* 화면 크기에 따라 항목이 줄바꿈되도록 */
-    flex-direction: column;
-    gap: 10px;
-    width: 100%;
-  }
-
-  nav ul li a {
-    font-size: 14px;
-    padding: 8px 12px;
-  }
-
-  h5 {
-    font-size: 20px; /* 태블릿 크기에서는 약간 작은 글씨 */
-  }
-}
-
-/* 480px 이하의 화면에서 */
-@media (max-width: 480px) {
-  h2 {
-    font-size: 24px;
-  }
-
-  h5 {
-    font-size: 30px; /* 모바일 크기에서는 더 작은 글씨 */
-  }
-
-  nav ul {
-    justify-content: center; /* 항목을 중앙 정렬 */
-    flex-wrap: wrap;
-    flex-direction: column;
-    gap: 10px;
-    width: 100%;
-  }
-
-  nav ul li a {
-    font-size: 12px;
-    padding: 8px;
-  }
 }

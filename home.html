@@ -29,9 +29,6 @@
                 <li>
                   <a href="join.html"><b>회원가입</b></a>
                 </li>
-                <li>
-                  <a href="boardcontent11.html"><b>게시판</b></a>
-                </li>
               </div>
 
               <div id="div2" style="display: inline-block">
@@ -42,13 +39,10 @@
                   <a href="#"><b>회원정보 수정</b></a>
                 </li>
                 <li>
-                  <a href="boardcontent11.html"><b>게시판</b></a>
+                  <a href="boardcontent11.html"><b>바코드</b></a>
                 </li>
                 <li>
-                  <a href="board11-1.html"><b>게시판목록</b></a>
-                </li>
-                <li>
-                  <a href="boardwrite11-1.html"><b>게시판 글쓰기</b></a>
+                  <a href="board11-1.html"><b>내 독서기록</b></a>
                 </li>
               </div>
             </div>
@@ -61,10 +55,7 @@
           <h3>Lib GO</h3>
         </div>
         <div>
-          <div
-            id="map"
-            style="width: 500px; height: 400px; align-items: center"
-          ></div>
+          <div id="map"></div>
         </div>
       </div>
     </div>
@@ -77,8 +68,8 @@
       window.onload = function () {
         var container = document.getElementById("map");
         var options = {
-          center: new kakao.maps.LatLng(33.450701, 126.570667),
-          level: 3,
+          center: new kakao.maps.LatLng(35.2334942, 128.6790201),
+          level: 5,
         };
         var map = new kakao.maps.Map(container, options);
       };
