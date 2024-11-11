@@ -148,12 +148,11 @@ h3 {
 } */
 
 #map {
-  position: relative;
-  left: 35%;
-  top: 150%;
+  position: absolute;
+  bottom: 20vh;
   width: 500px;
   height: 500px;
-  margin-top: 20vh;
+  left: 68vh;
 }
 
 header ul {
