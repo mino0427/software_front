@@ -1,3 +1,9 @@
+let navigation = document.querySelector(".navigation");
+document.querySelector(".menuToggle").onclick = function () {
+  this.classList.toggle("active");
+  navigation.classList.toggle("active");
+};
+
 // 저장소에서 token을 읽어봄
 // 이유는 로그인인지 로그아웃인지 확인하기 위해
 let token = sessionStorage.getItem("token"); // set은 넣는거 get은 가져오는거
