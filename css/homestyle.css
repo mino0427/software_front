@@ -24,7 +24,7 @@ section {
   background-size: cover;
 }
 
-h2 {
+h3 {
   position: absolute;
   bottom: 90vh;
   transform: translateY(50%);
